@@ -2,12 +2,12 @@ $(function() {
     'use strict';
 
     function translit(arg){
-        // Символ, на который будут заменяться все спецсимволы
+        // Special symbols will change on this
         let space = '-';
-        // Берем значение из нужного поля и переводим в нижний регистр
+        // Take the value
         let text = $(arg).val();
-        //let text = document.getElementById('name').value.toLowerCase();
-        // Массив для транслитерации
+      
+        // Create an Array
         let transl = {
                         'а': 'a', 'б': 'b', 'в': 'v', 'г': 'g', 'д': 'd', 'е': 'e', 'ё': 'io', 'ж': 'zh', 'з': 'z', 'и': 'i',
                         'й': 'j', 'к': 'k', 'л': 'l', 'м': 'm', 'н': 'n', 'о': 'o', 'п': 'p', 'р': 'r', 'с': 's', 'т': 't',
@@ -31,14 +31,14 @@ $(function() {
         let curent_sim = '';
 
         for(let i=0; i < text.length; i++) {
-            // Если символ найден в массиве то меняем его
+            // If the symbol exists in the Array
             if(transl[text[i]] !== undefined) {
                 if(curent_sim != transl[text[i]] || curent_sim != space){
                     result += transl[text[i]];
                     curent_sim = transl[text[i]];
                 }
             }
-            // Если нет, то оставляем так как есть
+            // If not - we not change
             else {
                 result += text[i];
                 curent_sim = text[i];
@@ -47,7 +47,7 @@ $(function() {
 
         result = TrimStr(result);
 
-        // Выводим результат
+        // Display the result
 
 
         $('.Active').val(result);
@@ -59,7 +59,7 @@ $(function() {
         return s.replace(/-$/, '');
     }
 
-    // Выполняем транслитерацию при вводе текста в поле
+    // Translit on keyup event
     $(function(){
         $('#LastName').keyup(function(){
             translit(this);
@@ -67,22 +67,13 @@ $(function() {
         });
     });
 
-    // Выполняем транслитерацию при вводе текста в поле
+    // Translit on keyup event in another field
     $(function(){
         $('#FirstName').keyup(function(){
             translit(this);
             return false;
         });
     });
-
-
-
-
-
-
-
-
-
 
 // Render Data of Select Group - Date of Birth
 
@@ -114,12 +105,6 @@ set_select("month", 12, 1, day.getMonth());
 
 set_select("year", 101, day.getFullYear()-100, 20);
 
-
-
-
-
-
-
 let year = document.getElementById('year');
 
 let month = document.getElementById("month");
@@ -140,14 +125,11 @@ set_select("day", md, 1, a);
 CheckYear ();
 }
 
-
-
 if (document.addEventListener) {
 
 year.addEventListener('change', check_date, false);
 
 month.addEventListener('change', check_date, false);
-
 
 
 } else {
@@ -158,21 +140,11 @@ month.detachEvent('onchange', check_date);
 
 }
 
-
-
-  //$('select').on('change', function(){
-
- // });
-
     function get_current_age(date) {
 
   return ((new Date().getTime() - new Date(date)) / (24 * 3600 * 365.25 * 1000)) | 0;
 
 }
-
-
-
-// $('#day').blur( function () {
 
  function CheckYear () {
   if ($('#day').val() < 10) {
@@ -190,8 +162,6 @@ month.detachEvent('onchange', check_date);
     MonthBirth = $('#month').val();
 
 
-
-
 //function DisplayError () {
   let DateBirth = $('#year').val() +'-'+ MonthBirth +'-'+DayBirth;
 
@@ -207,12 +177,11 @@ if (Age>90) {
 }
 if (Age<=90) {
  $('.displayError').html('');
-//alert (Age)}
+
 }
 }
 
 //Click on button Sex
-
 
 $('.button').on('click', function () {
     $('.js-selected').removeClass('js-selected');
@@ -244,9 +213,7 @@ $('.family').append('<option value="холост">холост</option>');
 $('.family').append('<option value="вдовец">вдовец</option>');
 
 
-
-
-//Family Select
+//Education Select
 $('.education').append('<option value="высшее">высшее</option>');
 $('.education').append('<option value="средне-специальное">средне-специальное</option>');
 $('.education').append('<option value="среднее">среднее</option>');
@@ -262,7 +229,6 @@ $(function(){
 })
 
 //Submission
-
 
 function formError(){
     $("#form-submit").addClass('bounce animated').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
@@ -334,10 +300,5 @@ $("#contactForm").validator().on("submit", function (event) {
 
 
 };
-
-
-
-
-
 
 });
