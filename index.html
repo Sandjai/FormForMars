@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="ru" >
+
+<head>
+    <title>Form</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+
+
+    <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
+	<link rel="stylesheet" href="/assets/css/animate.css">
+	<link rel="stylesheet" href="/assets/css/style.css">
+
+
+
+
+</head>
+<body>
+
+	<div class="container-fluid">
+
+		<div class="row">
+			<header>
+				 <h1><strong>Заявка на экскурсионный полёт на Марс</strong></h1>
+			</header>
+			<div class="col-lg-8 col-md-12" id="noize">
+
+                <div class="row  FormSector">
+					<div class="col-lg-12">
+						<div class="fields">
+							<form role="form" id="contactForm"  method="POST" data-toggle="validator">
+
+                <div class="field form-group">
+									<label for="LastName" class="h4 left" >Фамилия</label>
+									<input type="text" name="LastName" class="form-control input Shadow" id="LastName"   required pattern="^[А-Яа-яЁё]+$"
+											onfocus="$('#EnglishLastName').addClass('Active')" onblur="$('#EnglishLastName').removeClass('Active')" >
+									<span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+
+								</div>
+								<div class="field form-group FieldNarrow">
+									<div class="input MoveL">
+								<input name="Changed" class="checkB-input" type="checkbox">
+										<label class="checkB-label h4" for="Changed">ранее менялась</label>
+
+
+									</div>
+
+								</div>
+								<div class="field form-group">
+									<label for="FirstName" class="h4 left">Имя</label>
+									 <input type="text" name="FirstName" class="form-control input Shadow" id="FirstName" required onfocus="$('#EnglishFirstName').addClass('Active')" onblur="$('#EnglishFirstName').removeClass('Active')"
+									 pattern="^[А-Яа-яЁё]+$">
+
+								</div>
+								<div class="field form-group">
+									<label for="MiddleName" class="h4 left">Отчество</label>
+                  <input name="MiddleName" type="text" class="form-control input Shadow" id="MiddleName"  required>
+								</div>
+
+								<div class="field">
+									<div class="input MoveL">
+										<div  class="announce drop-shadow">
+
+												<p>Если вы не хотите лететь в багажном отсеке, пожалуйста, укажите ваше отчество.</p>
+
+										</div>
+
+									</div>
+                                </div>
+								<div style="margin-top: 25px" class="field form-group">
+									<label for="EnglishLastName" class="h4 left">Фамилия латиницей</label>
+                                    <input type="text" class="form-control input Shadow" name="EnglishLastName" id="EnglishLastName"   required>
+
+								</div>
+								<div class="field form-group">
+									<label for="EnglishFirstName" class="h4 left">Имя латиницей</label>
+                  <input type="text" name="EnglishFirstName" class="form-control input Shadow" id="EnglishFirstName"   required>
+
+								</div>
+								<div class="field form-group">
+
+										<label class="h4 left">Дата рождения</label>
+									<div class="MoveL input">
+									<div class="chColor">
+                                        <select class="backgr" name="day" id="day" required></select>
+                                        <select class="backgr" name="month" id="month" required ></select>
+                                        <select class="backgr" name="year" id="year" required></select>
+										</div>
+										<div class="displayError"></div>
+									</div>
+								</div>
+
+								<div class="field form-group" >
+									<label for="Sex" class="h4 left">Пол</label>
+                  <input id="Sex" name="Sex" hidden required>
+									<div class="input MoveL">
+
+										<input id="Male" name="Sex" class="button BL backgr" type="button" onclick="NotRequired()" value="Мужской">
+										<input id="Female" name="Sex" class="button BR backgr" type="button" onclick="NotRequired()" value="Женский">
+									</div>
+								</div>
+								<div class="field form-group">
+								<label for="family" class="h4 left">Семейное положение</label>
+									<div class="input MoveL">
+										<select name="family" class="backgr family" required></select>
+									</div>
+								</div>
+								<div class="field">
+									<label for="education" class="h4 left">Образование</label>
+										<div class="input MoveL">
+											<div>	<select name="education" class="education backgr" required></select></div>
+
+
+
+										</div>
+								</div>
+								<div class="field">
+									<div class="input MoveL">
+										<h3>Контактная информация</h3>
+									</div>
+								</div>
+								<div class="field form-group">
+
+										<label for="tel" class="h4 left">Моб. телефон</label>
+
+										<input name="tel" type="text" class="form-control input Shadow" id="tel" placeholder="+7"  required>
+
+
+								</div>
+								<div class="field form-group">
+									<label for="email" class="h4 left">Электронная почта</label>
+									<input name="email" type="email" class="form-control input Shadow" id="email" required>
+
+								</div>
+
+
+
+							</form>
+							</div>
+
+
+
+                    </div>
+                </div>
+			<div class="row">
+			<div class="col-md-12 submission">
+				<div class="fields">
+
+          <div class="field FieldNarrow form-group">
+            <div class="input MoveL">
+          <input name="Agree" form="contactForm" class="checkB-input" type="checkbox" id="Agree" required>
+              <label class="checkB-label h4" for="Agree">Ставя эту галочку, я подтверждаю, что поставил её в трезвом уме и твердой памяти</label>
+
+
+            </div>
+
+          </div>
+
+
+								<div class="field FieldNarrow">
+									<div class="input MoveL">
+
+
+
+										<button type="submit" id="form-submit" form="contactForm" class="SubmitBtn"><b>Полететь на Марс</b></button>
+										<div id="msgSubmit" class="h3 text-center hidden"></div>
+										<div id="resultMsg" class="clearfix"></div>
+									</div>
+								</div>
+
+				</div>
+
+            </div>
+</div>
+
+			</div>
+
+			<div class="col-lg-4 col-md-12 aside"><h5><p><br><b>Почему стабильно солнеченое затмение?</b></p></h5>
+				<p>Эффективный диаметр жизненно вызывает случайный эффективный радиус, а время ожидания ответа составило бы 80 миллиардов лет.</p>
+			</div>
+        </div><!-- /row -->
+	</div><!-- /container -->
+</body>
+
+
+	<script src="/assets/js/jquery-3.2.1.min.js"></script>
+    <script src="/assets/js/validator.min.js"></script>
+	   <script src="/assets/js/scripts.js"></script>
+	  <script src="/assets/js/jquery.maskedinput.min.js"></script>
+
+
+</body>
+
+</html>
