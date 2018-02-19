@@ -2,12 +2,12 @@ $(function() {
     'use strict';
 
     function translit(arg){
-        // Special symbols will change on this
+        // Символ, на который будут заменяться все спецсимволы
         let space = '-';
-        // Take the value
+        // Берем значение из нужного поля и переводим в нижний регистр
         let text = $(arg).val();
-      
-        // Create an Array
+        //let text = document.getElementById('name').value.toLowerCase();
+        // Массив для транслитерации
         let transl = {
                         'а': 'a', 'б': 'b', 'в': 'v', 'г': 'g', 'д': 'd', 'е': 'e', 'ё': 'io', 'ж': 'zh', 'з': 'z', 'и': 'i',
                         'й': 'j', 'к': 'k', 'л': 'l', 'м': 'm', 'н': 'n', 'о': 'o', 'п': 'p', 'р': 'r', 'с': 's', 'т': 't',
@@ -31,14 +31,14 @@ $(function() {
         let curent_sim = '';
 
         for(let i=0; i < text.length; i++) {
-            // If the symbol exists in the Array
+            // Если символ найден в массиве то меняем его
             if(transl[text[i]] !== undefined) {
                 if(curent_sim != transl[text[i]] || curent_sim != space){
                     result += transl[text[i]];
                     curent_sim = transl[text[i]];
                 }
             }
-            // If not - we not change
+            // Если нет, то оставляем так как есть
             else {
                 result += text[i];
                 curent_sim = text[i];
@@ -47,7 +47,7 @@ $(function() {
 
         result = TrimStr(result);
 
-        // Display the result
+        // Выводим результат
 
 
         $('.Active').val(result);
@@ -59,7 +59,7 @@ $(function() {
         return s.replace(/-$/, '');
     }
 
-    // Translit on keyup event
+    // Выполняем транслитерацию при вводе текста в поле
     $(function(){
         $('#LastName').keyup(function(){
             translit(this);
@@ -67,13 +67,22 @@ $(function() {
         });
     });
 
-    // Translit on keyup event in another field
+    // Выполняем транслитерацию при вводе текста в поле
     $(function(){
         $('#FirstName').keyup(function(){
             translit(this);
             return false;
         });
     });
+
+
+
+
+
+
+
+
+
 
 // Render Data of Select Group - Date of Birth
 
@@ -105,6 +114,12 @@ set_select("month", 12, 1, day.getMonth());
 
 set_select("year", 101, day.getFullYear()-100, 20);
 
+
+
+
+
+
+
 let year = document.getElementById('year');
 
 let month = document.getElementById("month");
@@ -125,11 +140,14 @@ set_select("day", md, 1, a);
 CheckYear ();
 }
 
+
+
 if (document.addEventListener) {
 
 year.addEventListener('change', check_date, false);
 
 month.addEventListener('change', check_date, false);
+
 
 
 } else {
@@ -140,11 +158,21 @@ month.detachEvent('onchange', check_date);
 
 }
 
+
+
+  //$('select').on('change', function(){
+
+ // });
+
     function get_current_age(date) {
 
   return ((new Date().getTime() - new Date(date)) / (24 * 3600 * 365.25 * 1000)) | 0;
 
 }
+
+
+
+// $('#day').blur( function () {
 
  function CheckYear () {
   if ($('#day').val() < 10) {
@@ -162,6 +190,8 @@ month.detachEvent('onchange', check_date);
     MonthBirth = $('#month').val();
 
 
+
+
 //function DisplayError () {
   let DateBirth = $('#year').val() +'-'+ MonthBirth +'-'+DayBirth;
 
@@ -177,25 +207,20 @@ if (Age>90) {
 }
 if (Age<=90) {
  $('.displayError').html('');
-
+ $('.chColor').css("background", "transparent");
+ $('.displayError').removeClass("drop-shadow");
+ $('.chColor').css("background", "transparent");
+//alert (Age)}
 }
 }
 
-//Click on button Sex
+//Click on button
+
 
 $('.button').on('click', function () {
-    $('.js-selected').removeClass('js-selected');
-    $(this).toggleClass('js-selected');
-    if ($('#Male').hasClass('js-selected')) {
-      $('#Sex').val("Мужской")
-    }
-    if ($('#Female').hasClass('js-selected')) {
-      $('#Sex').val("Женский")
-    }
+    $('.selected').removeClass('selected');
+    $(this).toggleClass('selected');
  });
-
-
-
 
 // Selected empty field by defolt
 $(function () {
@@ -204,18 +229,20 @@ $(function () {
 
 
 //Family Select
-$('.family').append('<option value="женат">женат</option>');
-$('.family').append('<option value="в гражданском браке"">в "гражданском браке"</option>');
-$('.family').append('<option value="разведён">разведён</option>');
-$('.family').append('<option value="холост">холост</option>');
-$('.family').append('<option value="вдовец">вдовец</option>');
+$('.family').append('<option value="married">женат</option>');
+$('.family').append('<option value="CivilMarried">в "гражданском браке"</option>');
+$('.family').append('<option value="divorced">разведён</option>');
+$('.family').append('<option value="single">холост</option>');
+$('.family').append('<option value="widower">вдовец</option>');
 
 
-//Education Select
-$('.education').append('<option value="высшее">высшее</option>');
-$('.education').append('<option value="средне-специальное">средне-специальное</option>');
-$('.education').append('<option value="среднее">среднее</option>');
-$('.education').append('<option value="студент">студент</option>');
+
+
+//Family Select
+$('.education').append('<option value="High">высшее</option>');
+$('.education').append('<option value="CivilMarried">средне-специальное</option>');
+$('.education').append('<option value="divorced">среднее</option>');
+$('.education').append('<option value="single">студент</option>');
 
 //Mask for the phone
 $(function(){
@@ -226,32 +253,40 @@ $(function(){
 
 })
 
+
+
 //Submission
 
-function formError(){
-    $("#form-submit").addClass('bounce animated').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
-        $(this).removeClass('bounce animated');
-         $("#resultMsg").html('Не все поля заполнены!');
-    });
-}
-
-// Bind to the submit event of our form
 $("#contactForm").validator().on("submit", function (event) {
     if (event.isDefaultPrevented()) {
         formError();
 
     } else {
         event.preventDefault();
-  var request;
-
-    // Prevent default posting of form - put here to work in case of errors
-    //event.preventDefault();
-
-    // Abort any pending request
-    if (request) {
-        request.abort();
+        submitForm();
     }
-    // setup some local variables
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function submitForm(){
+    // Initiate letiables With Form Content
+    /*let name = $("#name").val();
+    let email = $("#email").val();
+    let message = $("#message").val();*/
+
+
     var $form = $(this);
 
     // Let's select and cache all the fields
@@ -265,38 +300,43 @@ $("#contactForm").validator().on("submit", function (event) {
     // Disabled form elements will not be serialized.
     $inputs.prop("disabled", true);
 
-    // Fire off the request to /form.php
     request = $.ajax({
-            url: "https://script.google.com/macros/s/AKfycbyY1XIb8jUcxvH4D8CDY4ydtc8hVAat9Y9EowQ8jvsed7UhhVM/exec",
-            type: "post",
-            data: serializedData
-        });
+                url: "https://script.google.com/macros/s/AKfycbzV--xTooSkBLufMs4AnrCTdwZxVNtycTE4JNtaCze2UijXAg8/exec",
+                type: "post",
+                data: serializedData
 
-    // Callback handler that will be called on success
-    request.done(function (response, textStatus, jqXHR){
-        // Log a message to the console
-        console.log("Response is ok");
-       $("#resultMsg").html('Ваша заявка получена!');
+
+    /*$.ajax({
+        type: "POST",
+        url: "php/form-process.php",
+        data: "name=" + name + "&email=" + email + "&message=" + message,
+        success : function(text){
+            if (text == "success"){
+                formSuccess();
+            } else {
+                formError();
+
+            }
+        }
     });
+}*/
 
-    // Callback handler that will be called on failure
-    request.fail(function (jqXHR, textStatus, errorThrown){
-        // Log the error to the console
-        console.error(
-            "The following error occurred: "+
-            textStatus, errorThrown
-        );
-        $("#resultMsg").html('В ходе отправки произошла ошибка');
+function formSuccess(){
+    $("#contactForm")[0].reset();
+    submitMSG(true, "Ваше сообщение отправлено!")
+}
+
+function formError(){
+    $("#form-submit").addClass('bounce animated').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
+        $(this).removeClass('bounce animated');
     });
+}
 
-    // Callback handler that will be called regardless
-    // if the request failed or succeeded
-    request.always(function () {
-        // Reenable the inputs
-        $inputs.prop("disabled", false);
-    });
-
-
-};
-
-});
+function submitMSG(valid, msg){
+    if(valid){
+        var msgClasses = "h3 text-left tada animated text-success";
+    } else {
+        msgClasses = "h3 text-left text-danger";
+    }
+    $("#msgSubmit").removeClass().addClass(msgClasses).text(msg);
+}
