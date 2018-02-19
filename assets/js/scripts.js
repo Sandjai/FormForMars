@@ -208,11 +208,11 @@ if (Age>90) {
 if (Age<=90) {
  $('.displayError').html('');
  $('.chColor').css("background", "transparent");
- $('.displayError').removeClass("drop-shadow");
+ $('.displayError').css("background", "transparent");
  $('.chColor').css("background", "transparent");
 //alert (Age)}
 }
-}
+
 
 //Click on button
 
