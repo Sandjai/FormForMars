@@ -194,9 +194,7 @@ $('.button').on('click', function () {
     }
  });
 
-function NotRequired () {
-$('#sex').prop("required", "false");
-}
+
 
 
 // Selected empty field by defolt
