@@ -189,9 +189,6 @@ month.detachEvent('onchange', check_date);
  }
     MonthBirth = $('#month').val();
 
-
-
-
 //function DisplayError () {
   let DateBirth = $('#year').val() +'-'+ MonthBirth +'-'+DayBirth;
 
@@ -216,14 +213,24 @@ if (Age<=90) {
 }
 }
 
-
-//Click on button
+//Click on button Sex
 
 
 $('.button').on('click', function () {
-    $('.selected').removeClass('selected');
-    $(this).toggleClass('selected');
+    $('.js-selected').removeClass('js-selected');
+    $(this).toggleClass('js-selected');
+    if ($('#Male').hasClass('js-selected')) {
+      $('#Sex').val("Мужской")
+    }
+    if ($('#Female').hasClass('js-selected')) {
+      $('#Sex').val("Женский")
+    }
  });
+
+function NotRequired () {
+$('#sex').prop("required", "false");
+}
+
 
 // Selected empty field by defolt
 $(function () {
@@ -232,20 +239,20 @@ $(function () {
 
 
 //Family Select
-$('.family').append('<option value="married">женат</option>');
-$('.family').append('<option value="CivilMarried">в "гражданском браке"</option>');
-$('.family').append('<option value="divorced">разведён</option>');
-$('.family').append('<option value="single">холост</option>');
-$('.family').append('<option value="widower">вдовец</option>');
+$('.family').append('<option value="женат">женат</option>');
+$('.family').append('<option value="в гражданском браке"">в "гражданском браке"</option>');
+$('.family').append('<option value="разведён">разведён</option>');
+$('.family').append('<option value="холост">холост</option>');
+$('.family').append('<option value="вдовец">вдовец</option>');
 
 
 
 
 //Family Select
-$('.education').append('<option value="High">высшее</option>');
-$('.education').append('<option value="CivilMarried">средне-специальное</option>');
-$('.education').append('<option value="divorced">среднее</option>');
-$('.education').append('<option value="single">студент</option>');
+$('.education').append('<option value="высшее">высшее</option>');
+$('.education').append('<option value="средне-специальное">средне-специальное</option>');
+$('.education').append('<option value="среднее">среднее</option>');
+$('.education').append('<option value="студент">студент</option>');
 
 //Mask for the phone
 $(function(){
@@ -256,40 +263,33 @@ $(function(){
 
 })
 
-
-
 //Submission
 
+
+function formError(){
+    $("#form-submit").addClass('bounce animated').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
+        $(this).removeClass('bounce animated');
+         $("#resultMsg").html('Не все поля заполнены!');
+    });
+}
+
+// Bind to the submit event of our form
 $("#contactForm").validator().on("submit", function (event) {
     if (event.isDefaultPrevented()) {
         formError();
 
     } else {
         event.preventDefault();
-        submitForm();
+  var request;
+
+    // Prevent default posting of form - put here to work in case of errors
+    //event.preventDefault();
+
+    // Abort any pending request
+    if (request) {
+        request.abort();
     }
-});
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-function submitForm(){
-    // Initiate letiables With Form Content
-    /*let name = $("#name").val();
-    let email = $("#email").val();
-    let message = $("#message").val();*/
-
-
+    // setup some local variables
     var $form = $(this);
 
     // Let's select and cache all the fields
@@ -303,43 +303,38 @@ function submitForm(){
     // Disabled form elements will not be serialized.
     $inputs.prop("disabled", true);
 
+    // Fire off the request to /form.php
     request = $.ajax({
-                url: "https://script.google.com/macros/s/AKfycbzV--xTooSkBLufMs4AnrCTdwZxVNtycTE4JNtaCze2UijXAg8/exec",
-                type: "post",
-                data: serializedData
+            url: "https://script.google.com/macros/s/AKfycbyY1XIb8jUcxvH4D8CDY4ydtc8hVAat9Y9EowQ8jvsed7UhhVM/exec",
+            type: "post",
+            data: serializedData
+        });
 
-
-    /*$.ajax({
-        type: "POST",
-        url: "php/form-process.php",
-        data: "name=" + name + "&email=" + email + "&message=" + message,
-        success : function(text){
-            if (text == "success"){
-                formSuccess();
-            } else {
-                formError();
-
-            }
-        }
+    // Callback handler that will be called on success
+    request.done(function (response, textStatus, jqXHR){
+        // Log a message to the console
+        console.log("Response is ok");
+       $("#resultMsg").html('Ваша заявка получена!');
     });
-}*/
 
-function formSuccess(){
-    $("#contactForm")[0].reset();
-    submitMSG(true, "Ваше сообщение отправлено!")
-}
-
-function formError(){
-    $("#form-submit").addClass('bounce animated').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
-        $(this).removeClass('bounce animated');
+    // Callback handler that will be called on failure
+    request.fail(function (jqXHR, textStatus, errorThrown){
+        // Log the error to the console
+        console.error(
+            "The following error occurred: "+
+            textStatus, errorThrown
+        );
+        $("#resultMsg").html('В ходе отправки произошла ошибка');
     });
-}
 
-function submitMSG(valid, msg){
-    if(valid){
-        var msgClasses = "h3 text-left tada animated text-success";
-    } else {
-        msgClasses = "h3 text-left text-danger";
-    }
-    $("#msgSubmit").removeClass().addClass(msgClasses).text(msg);
-}
+    // Callback handler that will be called regardless
+    // if the request failed or succeeded
+    request.always(function () {
+        // Reenable the inputs
+        $inputs.prop("disabled", false);
+    });
+
+
+};
+
+});
