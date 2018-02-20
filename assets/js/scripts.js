@@ -206,11 +206,14 @@ if (Age>90) {
 //alert (Age)}
 }
 if (Age<=90) {
- $('.displayError').html('');
- $('.chColor').css("background", "transparent");
- $('.displayError').css("background", "transparent");
- $('.chColor').css("background", "transparent");
+  $('.displayError').html('');
+  $('.chColor').css("background", "transparent");
+  $('.displayError').css("background", "transparent");
+    $('.displayError').removeClass("drop-shadow");
+  $('.chColor').css("background", "transparent");
+
 //alert (Age)}
+}
 }
 
 
