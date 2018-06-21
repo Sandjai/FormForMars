@@ -314,7 +314,7 @@ $("#contactForm").validator().on("submit", function (event) {
     request.done(function (response, textStatus, jqXHR){
         // Log a message to the console
         console.log("Response is ok");
-       $("#resultMsg").html('Ваша заявка получена!<br> Результат <a href="https://docs.google.com/spreadsheets/d/1rR8qkYL57eQC9eQ9dC8pEVfbY11q9DZ04gNt1wzrAss/edit?usp=sharing">здесь</a>');
+       $("#resultMsg").html('Ваша заявка получена!<br> Результат <a target="_blank" href="https://docs.google.com/spreadsheets/d/1rR8qkYL57eQC9eQ9dC8pEVfbY11q9DZ04gNt1wzrAss/edit?usp=sharing">здесь</a>');
     });
 
     // Callback handler that will be called on failure
