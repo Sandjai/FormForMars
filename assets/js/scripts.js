@@ -305,7 +305,7 @@ $("#contactForm").validator().on("submit", function (event) {
 
     // Fire off the request to /form.php
     request = $.ajax({
-            url: "https://script.google.com/macros/s/AKfycbyY1XIb8jUcxvH4D8CDY4ydtc8hVAat9Y9EowQ8jvsed7UhhVM/exec",
+            url: "https://script.google.com/d/MNxRph6NtImST9IFhCOUBdCztl7b30MMG/edit?mid=ACjPJvE87rzcSPvKNKgUP9kyiHzMfbN7fQgTeFLtmOUcCPHwRCxC5qyf0_uYcww9YaYrZCRit2n2dUb4irf7PBXtl4AYdE7e1ybGGkQD0wBc8pWLcAekXF2JacD6MIqQ2_NAXjIrMPxhNVA&uiv=2",
             type: "post",
             data: serializedData
         });
