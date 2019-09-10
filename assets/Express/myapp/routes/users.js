@@ -7,6 +7,14 @@ var fs = require("fs");
 var path = require('path');
 var url = require('url');
 
+
+router.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "https://sandjai.github.io/FormForMars/"); 
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
+
+
 /* GET users listing. */
 router.get('/', function(req, res, next) {
 	var db = req.con;
@@ -93,3 +101,15 @@ console.log("Query "+qur.sql);
 });
 
 module.exports = router;
+
+
+
+
+
+
+
+
+
+
+
+
