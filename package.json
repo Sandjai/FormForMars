@@ -7,7 +7,7 @@
     "eslint": "^4.17.0",
     "express": "^4.10.6",
     "google-auth-library": "^0.12.0",
-    "googleapis": "^25.0.0",
+    "googleapis": "^59.0.0",
     "mysql": "^2.15.0",
     "node-static": "^0.7.10",
     "required": "^1.0.0"
